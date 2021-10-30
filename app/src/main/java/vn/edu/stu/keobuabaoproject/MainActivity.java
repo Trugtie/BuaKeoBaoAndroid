@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnKeo, btnBua, btnGiay, btnNghiChoi;
+    ImageButton btnKeo, btnBua, btnGiay;
+    Button btnNghiChoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void xuLyRa(View v){
-        String banRa = ((Button)v).getText().toString().toUpperCase();
+        String banRa = ((ImageButton)v).getTag().toString();
         Intent intent = new Intent(MainActivity.this,KetQuaActivity.class);
         intent.putExtra("BANRA",banRa);
         startActivity(intent);

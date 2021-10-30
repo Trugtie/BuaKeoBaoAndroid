@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,14 +15,15 @@ import java.util.Random;
 public class KetQuaActivity extends AppCompatActivity {
     public static ArrayList<String> kbg= new ArrayList<String>(){
         {
-            add("KÉO");
-            add("BÚA");
-            add("GIẤY");
+            add("1");
+            add("2");
+            add("3");
         }
     };
 
-    TextView txtBanRa, txtMayRa, txtKetQua;
+    TextView txtKetQua;
     Button btnTroLai;
+    ImageButton btnBanRa,btnMayRa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,10 @@ public class KetQuaActivity extends AppCompatActivity {
     }
 
     private void addControls(){
-        txtBanRa = findViewById(R.id.txtBanRa);
-        txtMayRa = findViewById(R.id.txtMayRa);
         txtKetQua = findViewById(R.id.txtKetQua);
         btnTroLai = findViewById(R.id.btnReturn);
+        btnBanRa = findViewById(R.id.btnBanRa);
+        btnMayRa = findViewById(R.id.btnMayRa);
     }
 
     private void addEvents(){
@@ -55,11 +57,11 @@ public class KetQuaActivity extends AppCompatActivity {
             if(banRa==""){
                 txtKetQua.setText("KHÔNG CÓ THÔNG TIN");
             }else{
-                txtBanRa.setText("Bạn ra: " + banRa);
+                render(banRa,btnBanRa);
                 int iBanRa = kbg.indexOf(banRa);
                 int iMayRa = new Random().nextInt(kbg.size());
                 String mayRa = kbg.get(iMayRa);
-                txtMayRa.setText("Kết quả: " + mayRa);
+                render(mayRa,btnMayRa);
                 int kq = iBanRa-iMayRa;
                 if(kq==0)txtKetQua.setText("Kết quả: HÒA");
                 else if(kq==1 || kq==-2)
@@ -68,7 +70,18 @@ public class KetQuaActivity extends AppCompatActivity {
             }
         }else
         {
-            txtBanRa.setText("KHÔNG CÓ THÔNG TIN");
+            render("4",btnBanRa);;
         }
+    }
+
+    private void render(String tag,ImageButton btn){
+        if(tag.equals("1"))
+            btn.setImageResource(R.drawable.keo);
+        else if (tag.equals("2"))
+            btn.setImageResource(R.drawable.bua);
+        else if(tag.equals("3"))
+            btn.setImageResource(R.drawable.giay);
+        else
+            btn.setImageResource(R.drawable.khong);
     }
 }
